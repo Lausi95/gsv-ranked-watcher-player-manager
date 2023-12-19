@@ -8,7 +8,7 @@ import services.ClientApi
 import services.interceptors.TokenProvider
 
 @Configuration
-private class RiotApiConfiguration(@Value("riot.api-key") val apiKey: String) {
+private class RiotApiConfiguration(@Value("\${riot.api-key}") val apiKey: String) {
 
   @EventListener(ApplicationStartedEvent::class)
   fun setUpRiotApi() {
