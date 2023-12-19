@@ -24,8 +24,11 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter")
   implementation("org.springframework.kafka:spring-kafka")
 
+  implementation("io.github.miniclem:kotlin-api-riot-wrapper:0.3")
+
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.kafka:spring-kafka-test")
+  testImplementation("com.tngtech.archunit:archunit:1.2.1")
 }
 
 tasks.withType<KotlinCompile> {
