@@ -22,6 +22,7 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
 
   implementation("org.springframework.boot:spring-boot-starter")
+  implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
   implementation("org.springframework.kafka:spring-kafka")
 
   implementation("io.github.miniclem:kotlin-api-riot-wrapper:0.3")
