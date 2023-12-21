@@ -11,7 +11,7 @@ group = "de.lausi95"
 version = "0.0.1-SNAPSHOT"
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_17
+  sourceCompatibility = JavaVersion.VERSION_21
 }
 
 repositories {
@@ -24,6 +24,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.kafka:spring-kafka")
+  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
   implementation("com.github.kimcore:riot.kt:1.0")
 
@@ -38,7 +39,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
   kotlinOptions {
     freeCompilerArgs += "-Xjsr305=strict"
-    jvmTarget = "17"
+    jvmTarget = "21"
   }
 }
 
