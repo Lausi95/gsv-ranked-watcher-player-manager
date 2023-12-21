@@ -17,6 +17,8 @@ class GsvRankedWatcherPlayerManagerApplicationTests {
       .withOptionalLayers(true)
       .adapter("kafka", "de.lausi95.gsvrankedwatcherplayermanager.adapter.kafka")
       .adapter("riot", "de.lausi95.gsvrankedwatcherplayermanager.adapter.riot")
+      .adapter("mongo", "de.lausi95.gsvrankedwatcherplayermanager.adapter.mongo")
+      .adapter("http", "de.lausi95.gsvrankedwatcherplayermanager.adapter.http")
       .domainModels("de.lausi95.gsvrankedwatcherplayermanager.domain.model.*")
       .applicationServices("de.lausi95.gsvrankedwatcherplayermanager.application")
       .check(classes)
