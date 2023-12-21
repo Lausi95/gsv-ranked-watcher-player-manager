@@ -17,14 +17,14 @@ class PlayerApplicationService(
     val player = playerResolver.resolvePlayer(summonerName) ?: return
 
     playerRepository.savePlayer(player)
-    playerNotifier.notifyPlayerAdded()
+    playerNotifier.notifyPlayersUpdated(playerRepository.getPlayers())
   }
 
   fun deletePlayer(summonerName: String) {
     val player = playerRepository.findBySummonerName(summonerName) ?: return
 
     playerRepository.deletePlayer(player)
-    playerNotifier.notifyPlayerDeleted()
+    playerNotifier.notifyPlayersUpdated(playerRepository.getPlayers())
   }
 
   fun getPlayers(): List<Player> {

@@ -11,21 +11,24 @@ group = "de.lausi95"
 version = "0.0.1-SNAPSHOT"
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_21
+  sourceCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
   mavenCentral()
+  maven("https://jitpack.io")
 }
 
 dependencies {
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-  implementation("org.springframework.boot:spring-boot-starter")
+  implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+  implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.kafka:spring-kafka")
 
-  implementation("io.github.miniclem:kotlin-api-riot-wrapper:0.3")
+  implementation("com.github.kimcore:riot.kt:1.0")
+
+  implementation("org.jetbrains.kotlin:kotlin-reflect")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.kafka:spring-kafka-test")
@@ -35,10 +38,14 @@ dependencies {
 tasks.withType<KotlinCompile> {
   kotlinOptions {
     freeCompilerArgs += "-Xjsr305=strict"
-    jvmTarget = "21"
+    jvmTarget = "17"
   }
 }
 
 tasks.withType<Test> {
   useJUnitPlatform()
+}
+
+tasks.bootJar {
+  archiveFileName = "application.jar"
 }
