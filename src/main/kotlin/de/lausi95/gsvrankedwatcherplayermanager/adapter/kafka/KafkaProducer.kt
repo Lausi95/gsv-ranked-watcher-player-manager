@@ -12,6 +12,6 @@ private class KafkaProducer(val kafkaTemplate: KafkaTemplate<String, Any>, val o
   override fun notifyPlayersUpdated(players: Collection<Player>) {
     val playersUpdatedMessage = PlayersUpdatedMessage(players.map { it.summonerId })
     val message = objectMapper.writeValueAsString(playersUpdatedMessage)
-    kafkaTemplate.send("players_updated", message)
+    kafkaTemplate.send(PLAYERS_UPDATED_TOPIC, message)
   }
 }

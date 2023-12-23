@@ -1,6 +1,5 @@
 package de.lausi95.gsvrankedwatcherplayermanager.application
 
-import de.lausi95.gsvrankedwatcherplayermanager.domain.model.Player
 import de.lausi95.gsvrankedwatcherplayermanager.domain.model.PlayerNotifier
 import de.lausi95.gsvrankedwatcherplayermanager.domain.model.PlayerRepository
 import de.lausi95.gsvrankedwatcherplayermanager.domain.model.PlayerResolver
@@ -27,7 +26,7 @@ class PlayerApplicationService(
     playerNotifier.notifyPlayersUpdated(playerRepository.getPlayers())
   }
 
-  fun getPlayers(): List<Player> {
-    return playerRepository.getPlayers()
+  fun boradcastPlayers() {
+    playerNotifier.notifyPlayersUpdated(playerRepository.getPlayers())
   }
 }
