@@ -10,10 +10,14 @@ import org.springframework.web.server.ResponseStatusException
 import java.net.URI
 
 data class PlayerResource(
-  val summonerId: String
+  val summonerId: String,
+  val summonerName: String,
 ) {
 
-  constructor(player: Player): this(player.summonerId)
+  constructor(player: Player): this(
+    player.summonerId,
+    player.summonerName
+  )
 }
 
 data class PlayerCollection(
