@@ -10,6 +10,10 @@ spring:
       bootstrap-servers: ${KAFKA_URL}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  data:
+    mongodb:
+      database: player-manager
+      host: ${MONGO_HOST}
 
 riot:
   api-key: ${RIOT_API_KEY}
