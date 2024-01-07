@@ -1,32 +1,33 @@
 package de.lausi95.gsvrankedwatcherplayermanager.application
 
-import de.lausi95.gsvrankedwatcherplayermanager.domain.model.PlayerNotifier
 import de.lausi95.gsvrankedwatcherplayermanager.domain.model.PlayerRepository
 import de.lausi95.gsvrankedwatcherplayermanager.domain.model.PlayerResolver
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import org.springframework.web.server.ResponseStatusException
 
 @Service
 class PlayerApplicationService(
-  val playerRepository: PlayerRepository,
-  val playerResolver: PlayerResolver,
-  val playerNotifier: PlayerNotifier
+  private val playerRepository: PlayerRepository,
+  private val playerResolver: PlayerResolver,
 ) {
 
-  fun addPlayer(summonerName: String) {
-    val player = playerResolver.resolvePlayer(summonerName) ?: return
+  fun addPlayer(summonerName: String): String {
+    if (playerRepository.existsBySummonerName(summonerName))
+      throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Player with summoner name $summonerName already exists.")
+
+    val player = playerResolver.resolvePlayer(summonerName)
+      ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Player with summoner name $summonerName not found.")
 
     playerRepository.savePlayer(player)
-    playerNotifier.notifyPlayersUpdated(playerRepository.getPlayers())
+
+    return player.summonerId
   }
 
   fun deletePlayer(summonerName: String) {
-    val player = playerRepository.findBySummonerName(summonerName) ?: return
+    val player = playerRepository.findBySummonerName(summonerName)
+      ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Player with summoner name $summonerName does not exist.")
 
     playerRepository.deletePlayer(player)
-    playerNotifier.notifyPlayersUpdated(playerRepository.getPlayers())
-  }
-
-  fun boradcastPlayers() {
-    playerNotifier.notifyPlayersUpdated(playerRepository.getPlayers())
   }
 }

@@ -9,4 +9,6 @@ interface PlayerRepository {
   fun findBySummonerName(summonerName: String): Player?
 
   fun deletePlayer(player: Player)
+
+  fun existsBySummonerName(summonerName: String): Boolean
 }

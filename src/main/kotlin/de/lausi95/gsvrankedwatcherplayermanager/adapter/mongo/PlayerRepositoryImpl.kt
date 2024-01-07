@@ -16,10 +16,12 @@ private data class PlayerEntity(@Id val summonerId: String, val summonerName: St
 private interface PlayerMongoRepository : MongoRepository<PlayerEntity, String> {
 
   fun findBySummonerName(summerName: String): PlayerEntity?
+
+  fun existsBySummonerName(summonerName: String): Boolean
 }
 
 @Component
-private class PlayerRepositoryImpl(val repository: PlayerMongoRepository) : PlayerRepository {
+private class PlayerRepositoryImpl(private val repository: PlayerMongoRepository) : PlayerRepository {
 
   override fun savePlayer(player: Player) {
     repository.save(PlayerEntity(player))
@@ -35,5 +37,9 @@ private class PlayerRepositoryImpl(val repository: PlayerMongoRepository) : Play
 
   override fun getPlayers(): List<Player> {
     return repository.findAll().map { it.toPlayer() }
+  }
+
+  override fun existsBySummonerName(summonerName: String): Boolean {
+    return repository.existsBySummonerName(summonerName)
   }
 }
