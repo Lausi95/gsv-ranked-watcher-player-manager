@@ -12,7 +12,7 @@ class PlayerApplicationService(
   private val playerResolver: PlayerResolver,
 ) {
 
-  fun addPlayer(summonerName: String): String {
+  fun addPlayer(summonerName: String) {
     if (playerRepository.existsBySummonerName(summonerName))
       throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Player with summoner name $summonerName already exists.")
 
@@ -20,8 +20,6 @@ class PlayerApplicationService(
       ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Player with summoner name $summonerName not found.")
 
     playerRepository.savePlayer(player)
-
-    return player.summonerId
   }
 
   fun deletePlayer(summonerName: String) {

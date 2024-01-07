@@ -45,8 +45,8 @@ class PlayerController(
   @ResponseStatus(HttpStatus.CREATED)
   fun addPlayer(@RequestBody request: AddPlayerRequest): ResponseEntity<Any> {
     val summonerName = requireNotNull(request.summonerName)
-    val summonerId = playerApplicationService.addPlayer(summonerName)
-    return ResponseEntity.created(URI.create("/players/$summonerId")).build()
+    playerApplicationService.addPlayer(summonerName)
+    return ResponseEntity.created(URI.create("/players/$summonerName")).build()
   }
 
   @GetMapping("/{summonerName}")
